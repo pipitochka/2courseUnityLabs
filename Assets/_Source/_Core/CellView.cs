@@ -7,12 +7,12 @@ using UnityEngine.Serialization;
 public class CellView : MonoBehaviour
 {
     private Cell cell;
- 
-    [SerializeField]
-    private TextMeshProUGUI points;
     
     [SerializeField] 
     private Image image;
+ 
+    [SerializeField]
+    private TextMeshProUGUI points;
     
     public void Init(Cell cell)
     {
@@ -34,8 +34,20 @@ public class CellView : MonoBehaviour
     {
         if (points != null)
         {
-            points.text = newValue.ToString();
-            points.color = ColorManager.Instance.colors[newValue];
+            
+            if (newValue != 0)
+            {
+                points.text = newValue.ToString();
+                int logValue = Mathf.FloorToInt(Mathf.Log(newValue, 2));
+                image.color = MyColorManager.Instance.colors[logValue + 1];
+
+            }
+            else
+            {
+                points.text = "";
+                image.color = MyColorManager.Instance.colors[0];
+
+            }
         }
     }
 

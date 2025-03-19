@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
+using Random = System.Random;
 
 public class GameField : MonoBehaviour
 {
@@ -67,6 +68,30 @@ public class GameField : MonoBehaviour
                 Cells[x, y].UpdateValue(0);;
             }
         }
+
+        var cell = GetEmptyCell();
+        CreateCell(cell);
+        cell = GetEmptyCell();
+        CreateCell(cell);
     }
-    
+
+    public Cell GetEmptyCell()
+    {
+        List<Cell> emptyCells = new List<Cell>();
+        foreach (Cell cell in Cells)
+        {
+            if (cell.Value == 0)
+            {
+                emptyCells.Add(cell);
+            }
+        }
+        
+        return emptyCells.Count > 0 ? emptyCells[UnityEngine.Random.Range(0, emptyCells.Count)] : null;
+    }
+
+    public void CreateCell(Cell cell)
+    {
+        int value = UnityEngine.Random.value < 0.9f ? 1 : 2;
+        cell.UpdateValue(value);
+    }
 }

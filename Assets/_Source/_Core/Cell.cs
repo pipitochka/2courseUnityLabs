@@ -19,11 +19,8 @@ public class Cell
 
     public void UpdateValue(int value)
     {
-        if (Value != value)
-        {
-            Value = value;
-            OnValueChanged?.Invoke(Value);
-        }
+        Value = value;
+        OnValueChanged?.Invoke(Value);
     }
 
     public void UpdatePosition(float x, float y)

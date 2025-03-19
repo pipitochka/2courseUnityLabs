@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class ColorManager: MonoBehaviour
+public class MyColorManager: MonoBehaviour
 {
-    public static ColorManager Instance;
+    public static MyColorManager Instance;
 
     public Color[] colors;
     
