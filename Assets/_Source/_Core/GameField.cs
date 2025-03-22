@@ -5,6 +5,8 @@ using Random = System.Random;
 
 public class GameField : MonoBehaviour
 {
+    public static GameField Instance;
+    
     [Header("Game Field sizes")] 
     public float SplacingTop;
     public float CellSize;
@@ -21,9 +23,12 @@ public class GameField : MonoBehaviour
     private CellView[,] Field;
     private Cell[,] Cells;
 
-    private void Start()
+    public void Awake()
     {
-        GenerateField();
+        if (Instance == null)
+        {
+            Instance = this;
+        }
     }
     
     private void CreateField()
