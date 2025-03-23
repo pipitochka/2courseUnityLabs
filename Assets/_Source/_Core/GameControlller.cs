@@ -1,19 +1,20 @@
+using System;
 using TMPro;
 using UnityEngine;
 
-public class GameController : MonoBehaviour
+public class GameControlller : MonoBehaviour
 {
-    public static GameController Instance;
+    public static GameControlller Instance;
     
-    public static int Points { get; set; }
-    public static bool GameStarted { get; set; }
-
+    public static int Points {get; private set;}
+    public static bool GameStarted {get; private set;}
+    
     [SerializeField] 
     private TextMeshProUGUI gameResult;
-    [SerializeField]
+    [SerializeField] 
     private TextMeshProUGUI pointsText;
-    
-    private void Awake()
+
+    public void Awake()
     {
         if (Instance == null)
         {
@@ -21,18 +22,14 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        StartGame();
-    }
-
     public void StartGame()
     {
         gameResult.text = "";
-        SetPoints(0);
-        GameField.Instance.GenerateField();
         
+        SetPoints(0);
         GameStarted = true;
+        
+        Field.Instance.GenerateField();
     }
 
     public void AddPoints(int points)
@@ -40,19 +37,24 @@ public class GameController : MonoBehaviour
         SetPoints(Points + points);
     }
 
-    public void SetPoints(int points)
+    private void SetPoints(int points)
     {
         Points = points;
         pointsText.text = Points.ToString();
     }
 
-    private void Win()
+    private void Start()
+    {
+        StartGame();
+    }
+
+    public void Win()
     {
         GameStarted = false;
         gameResult.text = "WIN";
     }
 
-    private void Lose()
+    public void Lose()
     {
         GameStarted = false;
         gameResult.text = "LOSE";
