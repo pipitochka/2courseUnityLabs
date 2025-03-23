@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class Field : MonoBehaviour
@@ -12,12 +13,13 @@ public class Field : MonoBehaviour
    public int FieldSize;
    public int StartCellsCount;
    
-   [SerializeField]
-   private Cell _cellPrefab;
+   [FormerlySerializedAs("_cellPrefab")] [SerializeField]
+   private CellView cellViewPrefab;
    [SerializeField] 
    private RectTransform rt;
 
    private Cell[,] field;
+   private CellView[,] cellViews;
    
    private bool anyCellMoved;
 
@@ -33,6 +35,7 @@ public class Field : MonoBehaviour
    public void CreateField()
    {
       field = new Cell[FieldSize, FieldSize];
+      cellViews = new CellView[FieldSize, FieldSize];
       
       float fieldWith = FieldSize * (CellSize + Splacing) + Splacing;
       rt.sizeDelta = new Vector2(fieldWith, fieldWith);
@@ -44,11 +47,15 @@ public class Field : MonoBehaviour
       {
          for (int y = 0; y < FieldSize; y++)
          {
-            var cell = Instantiate(_cellPrefab, transform, false);
+            CellView cellView = Instantiate(cellViewPrefab, transform, false);
             var position = new Vector2(x * (CellSize + Splacing) + startX, - y * (CellSize + Splacing) + startY);
-            cell.transform.localPosition = position;
+            cellView.transform.localPosition = position;
+
+            Cell cell = new Cell(x, y, 0);
+            cellView.Init(cell);
             
             field[x, y] = cell;
+            cellViews[x, y] = cellView;
             
             cell.SetValue(x, y, 0);
          }
@@ -229,7 +236,12 @@ public class Field : MonoBehaviour
       {
          for (int y = 0; y < FieldSize; y++)
          {
-            if (lose && field[x, y].IsEmpty || FindCellToMerge(field[x, y], Vector2.left) || FindCellToMerge(field[x, y], Vector2.right) || FindCellToMerge(field[x, y], Vector2.up) || FindCellToMerge(field[x, y], Vector2.down))
+            if (lose && 
+                field[x, y].IsEmpty || 
+                FindCellToMerge(field[x, y], Vector2.left) != null || 
+                FindCellToMerge(field[x, y], Vector2.right) != null || 
+                FindCellToMerge(field[x, y], Vector2.up) != null|| 
+                FindCellToMerge(field[x, y], Vector2.down) != null)
             {
                lose = false;
                return;

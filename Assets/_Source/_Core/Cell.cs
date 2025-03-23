@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using Image = UnityEngine.UI.Image;
 
-public class Cell : MonoBehaviour
+public class Cell
 {
     public int X { get; private set; }
     public int Y {get; private set;}
@@ -15,6 +15,11 @@ public class Cell : MonoBehaviour
     public bool IsEmpty => Value == 0;
 
     public const int MaxValue = 11;
+    
+    public event Action<int> OnValueChanged;
+    public event Action<float, float> OnPositionChanged;
+
+
 
     public bool HasMerged { get; private set; }
     
@@ -29,14 +34,10 @@ public class Cell : MonoBehaviour
         Y = y;
         Value = value;
         
-        UpdateCell();
+        OnValueChanged?.Invoke(Value);
+        
     }
-
-    public void UpdateCell()
-    {
-        points.text = IsEmpty ? String.Empty : Points.ToString();
-        image.color = ColorManager.Instance.CellColors[Value];
-    }
+    
 
     public void IncreaseValue()
     {
@@ -45,7 +46,7 @@ public class Cell : MonoBehaviour
         
         GameControlller.Instance.AddPoints(Points);
         
-        UpdateCell();
+        OnValueChanged?.Invoke(Value);
     }
 
     public void ResetFlags()
@@ -58,12 +59,19 @@ public class Cell : MonoBehaviour
         cell.IncreaseValue();
         SetValue(X, Y, 0);
         
-        UpdateCell();
+        OnValueChanged?.Invoke(Value);
     }
 
     public void MoveToCell(Cell cell)
     {
         cell.SetValue(cell.X, cell.Y, Value);
         SetValue(X, Y, 0);
+    }
+
+    public Cell(int x, int y, int value)
+    {
+        X = x;
+        Y = y;
+        Value = value;
     }
 }
