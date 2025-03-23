@@ -79,11 +79,11 @@ public class Field : MonoBehaviour
 
       for (int x = 0; x < StartCellsCount; x++)
       {
-         GenerateRandomCell();
+         CreateCell();
       }
    }
 
-   private void GenerateRandomCell()
+   public Vector2Int GetEmptyPosition()
    {
       var emptyList = new List<Cell>();
 
@@ -102,14 +102,23 @@ public class Field : MonoBehaviour
       {
          throw new System.Exception("Field is empty");
       }
-
-      int value = UnityEngine.Random.value < 0.9f ? 1 : 2;
+      
       var cell = emptyList[Random.Range(0, emptyList.Count)];
+      
+      return new Vector2Int(cell.X, cell.Y);
+   }
+   
+   private void CreateCell()
+   {
+      
+      var position = GetEmptyPosition();
+      int value = UnityEngine.Random.value < 0.9f ? 1 : 2;
+      var cell = field[position.x, position.y];
       cell.SetValue(cell.X, cell.Y, value);
 
    }
 
-   private void OnInput(Vector2 direction)
+   public void OnInput(Vector2 direction)
    {
       if (!GameControlller.GameStarted)
       {
@@ -122,7 +131,7 @@ public class Field : MonoBehaviour
 
       if (anyCellMoved)
       {
-         GenerateRandomCell();
+         CreateCell();
          CheckGameResult();
       }
    }
@@ -258,30 +267,50 @@ public class Field : MonoBehaviour
       
    }
 
-   public void Update()
-   {
-#if UNITY_EDITOR
-      if (Input.GetKeyDown(KeyCode.A))
-      {
-         OnInput(Vector2.left);
-      }
-
-      if (Input.GetKeyDown(KeyCode.D))
-      {
-         OnInput(Vector2.right);
-      }
-
-      if (Input.GetKeyDown(KeyCode.W))
-      {
-         OnInput(Vector2.up);
-      }
-
-      if (Input.GetKeyDown(KeyCode.S))
-      {
-         OnInput(Vector2.down);
-      }
-#endif      
-   }
+//    public void Update()
+//    {
+// #if UNITY_EDITOR
+//       if (Input.GetKeyDown(KeyCode.A))
+//       {
+//          OnInput(Vector2.left);
+//       }
+//
+//       if (Input.GetKeyDown(KeyCode.D))
+//       {
+//          OnInput(Vector2.right);
+//       }
+//
+//       if (Input.GetKeyDown(KeyCode.W))
+//       {
+//          OnInput(Vector2.up);
+//       }
+//
+//       if (Input.GetKeyDown(KeyCode.S))
+//       {
+//          OnInput(Vector2.down);
+//       }
+//
+//       if (Input.GetKeyDown(KeyCode.LeftArrow))
+//       {
+//          OnInput(Vector2.left);
+//       }
+//
+//       if (Input.GetKeyDown(KeyCode.RightArrow))
+//       {
+//          OnInput(Vector2.right);
+//       }
+//
+//       if (Input.GetKeyDown(KeyCode.UpArrow))
+//       {
+//          OnInput(Vector2.up);
+//       }
+//
+//       if (Input.GetKeyDown(KeyCode.DownArrow))
+//       {
+//          OnInput(Vector2.down);
+//       }
+// #endif      
+//    }
 
    private void ResetCellFlags()
    {

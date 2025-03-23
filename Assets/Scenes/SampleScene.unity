@@ -375,8 +375,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
+      - m_Target: {fileID: 1521064359}
+        m_TargetAssemblyTypeName: GameControlller, Assembly-CSharp
         m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
@@ -608,10 +608,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 464731086}
-  - component: {fileID: 464731089}
   - component: {fileID: 464731088}
   - component: {fileID: 464731087}
   - component: {fileID: 464731090}
+  - component: {fileID: 464731091}
   m_Layer: 5
   m_Name: Field
   m_TagString: Untagged
@@ -676,18 +676,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 464731085}
   m_CullTransparentMesh: 1
---- !u!114 &464731089
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 464731085}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72a2c860c3aa24cccbcc712ed9987beb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &464731090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -704,8 +692,20 @@ MonoBehaviour:
   Splacing: 40
   FieldSize: 4
   StartCellsCount: 2
-  _cellPrefab: {fileID: 1885674772121029864, guid: d011f1917ed954ac3a5bd6a13e78a1a8, type: 3}
+  cellViewPrefab: {fileID: 1885674772121029864, guid: d011f1917ed954ac3a5bd6a13e78a1a8, type: 3}
   rt: {fileID: 464731086}
+--- !u!114 &464731091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 464731085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04fbee2c70b574c56ae19c4c9b9ab879, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -936,7 +936,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 712360941}
-  - component: {fileID: 712360940}
   - component: {fileID: 712360942}
   m_Layer: 0
   m_Name: ColorManager
@@ -945,18 +944,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &712360940
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 712360939}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c47beb9fa99a45daa9af461268aefdc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &712360941
 Transform:
   m_ObjectHideFlags: 0
@@ -1347,6 +1334,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1321465631}
   m_CullTransparentMesh: 1
+--- !u!1 &1521064358
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1521064360}
+  - component: {fileID: 1521064359}
+  m_Layer: 0
+  m_Name: GameController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1521064359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1521064358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbda8ad47ce034fcfa0ff4c47aacf747, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameResult: {fileID: 1321465633}
+  pointsText: {fileID: 1982284131}
+--- !u!4 &1521064360
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1521064358}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 440.24432, y: 571.981, z: -3.6293728}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1607995486
 GameObject:
   m_ObjectHideFlags: 0
@@ -1673,3 +1706,4 @@ SceneRoots:
   - {fileID: 2133385755}
   - {fileID: 354640370}
   - {fileID: 712360941}
+  - {fileID: 1521064360}
