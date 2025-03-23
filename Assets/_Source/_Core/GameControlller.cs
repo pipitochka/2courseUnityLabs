@@ -31,6 +31,16 @@ public class GameControlller : MonoBehaviour
         
         Field.Instance.GenerateField();
     }
+    
+    public void RestartGame()
+    {
+        gameResult.text = "";
+        
+        SetPoints(0);
+        GameStarted = true;
+        
+        Field.Instance.GenerateNewField();
+    }
 
     public void AddPoints(int points)
     {
@@ -58,5 +68,16 @@ public class GameControlller : MonoBehaviour
     {
         GameStarted = false;
         gameResult.text = "LOSE";
+    }
+
+    public int GetPoints()
+    {
+        return Points;
+    }
+
+    public void ChangePoints(int points)
+    {
+        Points = points;
+        pointsText.text = Points.ToString();
     }
 }

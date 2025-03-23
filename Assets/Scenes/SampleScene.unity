@@ -377,7 +377,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1521064359}
         m_TargetAssemblyTypeName: GameControlller, Assembly-CSharp
-        m_MethodName: StartGame
+        m_MethodName: RestartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -694,6 +694,7 @@ MonoBehaviour:
   StartCellsCount: 2
   cellViewPrefab: {fileID: 1885674772121029864, guid: d011f1917ed954ac3a5bd6a13e78a1a8, type: 3}
   rt: {fileID: 464731086}
+  saveLoadManager: {fileID: 864039270}
 --- !u!114 &464731091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -985,6 +986,50 @@ MonoBehaviour:
   - {r: 0.49411762, g: 0.6293072, b: 1, a: 1}
   - {r: 0.49411762, g: 0.8106265, b: 1, a: 1}
   - {r: 0.49411762, g: 0.9902915, b: 1, a: 1}
+--- !u!1 &864039269
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 864039271}
+  - component: {fileID: 864039270}
+  m_Layer: 0
+  m_Name: SaveLoadManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &864039270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 864039269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b155d3e561a784534a88b7439084c651, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &864039271
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 864039269}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 360, y: 490, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1034105122
 GameObject:
   m_ObjectHideFlags: 0
@@ -1707,3 +1752,4 @@ SceneRoots:
   - {fileID: 354640370}
   - {fileID: 712360941}
   - {fileID: 1521064360}
+  - {fileID: 864039271}

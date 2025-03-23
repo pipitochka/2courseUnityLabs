@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -17,6 +18,8 @@ public class Field : MonoBehaviour
    private CellView cellViewPrefab;
    [SerializeField] 
    private RectTransform rt;
+   [SerializeField]
+   private SaveLoadManager saveLoadManager;
 
    private Cell[,] field;
    private CellView[,] cellViews;
@@ -68,7 +71,34 @@ public class Field : MonoBehaviour
       {
          CreateField();
       }
+      
+      var t = ReadFromFile();
+      if (t == true)
+      {
+         return;
+      }
 
+      for (int x = 0; x < FieldSize; x++)
+      {
+         for (int y = 0; y < FieldSize; y++)
+         {
+            field[x, y].SetValue(x, y, 0);
+         }
+      }
+
+      for (int x = 0; x < StartCellsCount; x++)
+      {
+         CreateCell();
+      }
+   }
+   
+   public void GenerateNewField()
+   {
+      if (field == null)
+      {
+         CreateField();
+      }
+      
       for (int x = 0; x < FieldSize; x++)
       {
          for (int y = 0; y < FieldSize; y++)
@@ -134,6 +164,8 @@ public class Field : MonoBehaviour
          CreateCell();
          CheckGameResult();
       }
+      
+      saveLoadManager.SaveArrayToFile(field, GameControlller.Instance.GetPoints());
    }
 
    private void Move(Vector2 direction)
@@ -172,6 +204,8 @@ public class Field : MonoBehaviour
 
          }
       }
+      
+      
    }
 
    private Cell FindCellToMerge(Cell cell, Vector2 direction)
@@ -321,5 +355,25 @@ public class Field : MonoBehaviour
             field[x, y].ResetFlags();
          }
       }
+   }
+
+   private bool ReadFromFile()
+   {
+      
+      var t = saveLoadManager.LoadFieldData();
+
+      if (t != null)
+      {
+         for (int x = 0; x < FieldSize; x++)
+         {
+            for (int y = 0; y < FieldSize; y++)
+            {
+               field[x, y].SetValue(field[x, y].X, field[x, y].Y, t[x * FieldSize + y]);
+            }
+         }
+         GameControlller.Instance.ChangePoints(t[FieldSize*FieldSize]);
+         return true;
+      }
+      return false;
    }
 }
