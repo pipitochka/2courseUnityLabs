@@ -1,18 +1,17 @@
-using UnityEngine;
-using UnityEngine.UI;
 using System;
 using TMPro;
-using UnityEngine.Serialization;
+using UnityEngine;
+using Image = UnityEngine.UI.Image;
 
 public class CellView : MonoBehaviour
 {
     private Cell cell;
     
-    [SerializeField] 
-    private Image image;
- 
     [SerializeField]
-    private TextMeshProUGUI points;
+    private Image image;
+    [SerializeField]
+    TextMeshProUGUI points;
+
     
     public void Init(Cell cell)
     {
@@ -28,33 +27,19 @@ public class CellView : MonoBehaviour
         
         UpdateValue(cell.Value);
         UpdatePosition(cell.X, cell.Y);
+        
     }
     
     private void UpdateValue(int newValue)
     {
-        if (points != null)
+        if (cell != null)
         {
-            
-            if (newValue != 0)
-            {
-                points.text = newValue.ToString();
-                int logValue = Mathf.FloorToInt(Mathf.Log(newValue, 2));
-                image.color = MyColorManager.Instance.colors[logValue + 1];
-
-            }
-            else
-            {
-                points.text = "";
-                image.color = MyColorManager.Instance.colors[0];
-
-            }
+            points.text = cell.IsEmpty ? String.Empty : cell.Points.ToString();
+            image.color = ColorManager.Instance.CellColors[cell.Value];
         }
     }
 
     private void UpdatePosition(float x, float y)
     {
-        RectTransform rectTransform = GetComponent<RectTransform>();
-        rectTransform.anchoredPosition = new Vector2(x, y);
-        
     }
 }

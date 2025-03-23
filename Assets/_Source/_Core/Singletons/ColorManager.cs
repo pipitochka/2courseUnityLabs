@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class MyColorManager: MonoBehaviour
+public class ColorManager : MonoBehaviour
 {
-    public static MyColorManager Instance;
+    public static ColorManager Instance;
 
-    public Color[] colors;
+    public Color[] CellColors; 
     
     public void Awake()
     {
