@@ -8,7 +8,7 @@ public class Cell
     public int X { get; private set; }
     public int Y {get; private set;}
     
-    public int Value {get; private set;}
+    public int Value {get; set;}
     
     public int Points => Value == 0 ? 0 : (int)Mathf.Pow(2, Value);
     
@@ -43,9 +43,12 @@ public class Cell
     {
         Value++;
         HasMerged = true;
-        
-        GameControlller.Instance.AddPoints(Points);
-        
+
+        if (GameControlller.Instance != null)
+        {
+            GameControlller.Instance.AddPoints(Points);
+        }
+
         OnValueChanged?.Invoke(Value);
     }
 

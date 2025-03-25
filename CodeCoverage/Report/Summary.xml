@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageReport scope="Summary">
+  <Summary>
+    <Generatedon>3/25/2025 - 8:02:53 AM</Generatedon>
+    <Parser>MultiReportParser (4x OpenCoverParser)</Parser>
+    <Assemblies>2</Assemblies>
+    <Classes>9</Classes>
+    <Files>9</Files>
+    <Coveredlines>247</Coveredlines>
+    <Uncoveredlines>453</Uncoveredlines>
+    <Coverablelines>700</Coverablelines>
+    <Totallines>1259</Totallines>
+    <Linecoverage>35.2</Linecoverage>
+    <Coveredbranches>0</Coveredbranches>
+    <Totalbranches>0</Totalbranches>
+    <Coveredmethods>43</Coveredmethods>
+    <Totalmethods>116</Totalmethods>
+    <Methodcoverage>37</Methodcoverage>
+  </Summary>
+  <Coverage>
+    <Assembly name="Assembly-CSharp" classes="8" coverage="29.7" coveredlines="192" coverablelines="645" totallines="1153" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="34" totalmethods="107" methodcoverage="31.7">
+      <Class name="Cell" coverage="84.6" coveredlines="33" coverablelines="39" totallines="80" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="15" totalmethods="16" methodcoverage="93.7" />
+      <Class name="CellView" coverage="61.9" coveredlines="13" coverablelines="21" totallines="45" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" totalmethods="3" methodcoverage="100" />
+      <Class name="ColorManager" coverage="0" coveredlines="0" coverablelines="6" totallines="16" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="1" methodcoverage="0" />
+      <Class name="Field" coverage="45.3" coveredlines="146" coverablelines="322" totallines="413" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="16" totalmethods="31" methodcoverage="51.6" />
+      <Class name="GameControlller" coverage="0" coveredlines="0" coverablelines="45" totallines="83" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="14" methodcoverage="0" />
+      <Class name="GameInput" coverage="0" coveredlines="0" coverablelines="87" totallines="331" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="31" methodcoverage="0" />
+      <Class name="InputController" coverage="0" coveredlines="0" coverablelines="86" totallines="120" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="8" methodcoverage="0" />
+      <Class name="SaveLoadManager" coverage="0" coveredlines="0" coverablelines="39" totallines="65" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="3" methodcoverage="0" />
+    </Assembly>
+    <Assembly name="Assembly-CSharp-Editor" classes="1" coverage="100" coveredlines="55" coverablelines="55" totallines="106" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="9" totalmethods="9" methodcoverage="100">
+      <Class name="GameTests" coverage="100" coveredlines="55" coverablelines="55" totallines="106" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="9" totalmethods="9" methodcoverage="100" />
+    </Assembly>
+  </Coverage>
+</CoverageReport>

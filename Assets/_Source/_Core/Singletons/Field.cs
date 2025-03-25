@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
+
 public class Field : MonoBehaviour
 {
    public static Field Instance;
@@ -15,17 +16,19 @@ public class Field : MonoBehaviour
    public int StartCellsCount;
    
    [FormerlySerializedAs("_cellPrefab")] [SerializeField]
-   private CellView cellViewPrefab;
+   public CellView cellViewPrefab;
    [SerializeField] 
-   private RectTransform rt;
+   public RectTransform rt;
    [SerializeField]
-   private SaveLoadManager saveLoadManager;
+   public SaveLoadManager saveLoadManager;
 
    private Cell[,] field;
    private CellView[,] cellViews;
    
    private bool anyCellMoved;
 
+   public bool isTest = false;
+   
    public void Awake()
    {
       if (Instance == null)
@@ -140,7 +143,6 @@ public class Field : MonoBehaviour
    
    private void CreateCell()
    {
-      
       var position = GetEmptyPosition();
       int value = UnityEngine.Random.value < 0.9f ? 1 : 2;
       var cell = field[position.x, position.y];
@@ -164,11 +166,14 @@ public class Field : MonoBehaviour
          CreateCell();
          CheckGameResult();
       }
-      
-      saveLoadManager.SaveArrayToFile(field, GameControlller.Instance.GetPoints());
+
+      if (!isTest)
+      {
+         saveLoadManager.SaveArrayToFile(field, GameControlller.Instance.GetPoints());
+      }
    }
 
-   private void Move(Vector2 direction)
+   public void Move(Vector2 direction)
    {
       int startXY = direction.x > 0 || direction.y < 0 ? FieldSize - 1 : 0;
       int dir = direction.x != 0 ? (int)direction.x : -(int)direction.y;
@@ -359,6 +364,10 @@ public class Field : MonoBehaviour
 
    private bool ReadFromFile()
    {
+      if (isTest)
+      {
+         return false;
+      }
       
       var t = saveLoadManager.LoadFieldData();
 
@@ -375,5 +384,30 @@ public class Field : MonoBehaviour
          return true;
       }
       return false;
+   }
+
+   public int[,] getField()
+   {
+      int[,] data = new int[FieldSize, FieldSize];
+      for (int x = 0; x < FieldSize; x++)
+      {
+         for (int y = 0; y < FieldSize; y++)
+         {
+            data[y, x] = field[x, y].Points;
+         }
+      }
+      return data;
+   }
+
+   public void setField(int[,] data)
+   {
+      for (int x = 0; x < FieldSize; x++)
+      {
+         for (int y = 0; y < FieldSize; y++)
+         {
+            int value = data[y, x] > 0 ? (int)Mathf.Log(data[y, x], 2) : 0;
+            field[x, y].Value = value;
+         }
+      }
    }
 }
