@@ -70,9 +70,9 @@ public class GameTests
         
         Assert.AreEqual(dataIn, dataOut);
     }
-    
-    [Test] 
-    public void MovementTestRight()
+
+    [Test]
+    public void MovementTest()
     {
         int[,] dataIn = new int[,]
         {
@@ -81,15 +81,15 @@ public class GameTests
             { 2, 2, 2, 2 },
             { 0, 2, 0, 0 }
         };
-        
+
         field.setField(dataIn);
 
         int[,] dataOut;
-        
+
         field.Move(Vector2.right);
-        
+
         dataOut = field.getField();
-        
+
         int[,] dataOutReal = new int[,]
         {
             { 0, 0, 0, 4 },
@@ -97,10 +97,8 @@ public class GameTests
             { 0, 0, 4, 4 },
             { 0, 0, 0, 2 }
         };
-        
+
         Assert.AreEqual(dataOut, dataOutReal);
     }
-    
-    
     
 }
