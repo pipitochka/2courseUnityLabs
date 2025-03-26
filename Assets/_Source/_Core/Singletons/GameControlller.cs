@@ -1,83 +1,95 @@
-using System;
 using TMPro;
 using UnityEngine;
 
-public class GameControlller : MonoBehaviour
+namespace Singletons
 {
-    public static GameControlller Instance;
-    
-    public static int Points {get; private set;}
-    public static bool GameStarted {get; private set;}
-    
-    [SerializeField] 
-    private TextMeshProUGUI gameResult;
-    [SerializeField] 
-    private TextMeshProUGUI pointsText;
-
-    public void Awake()
+    public class GameControlller : MonoBehaviour
     {
-        if (Instance == null)
+        public static GameControlller Instance;
+    
+        public static int Points {get; private set;}
+        public static bool GameStarted {get; private set;}
+    
+        [SerializeField] 
+        private TextMeshProUGUI gameResult;
+        [SerializeField] 
+        private TextMeshProUGUI pointsText;
+
+        public void Awake()
         {
-            Instance = this;
+            if (Instance == null)
+            {
+                Instance = this;
+            }
         }
-    }
 
-    public void StartGame()
-    {
-        gameResult.text = "";
+        public void StartGame()
+        {
+            gameResult.text = "";
         
-        SetPoints(0);
-        GameStarted = true;
+            SetPoints(0);
+            GameStarted = true;
         
-        Field.Instance.GenerateField();
-    }
+            Field.Instance.GenerateField();
+        }
     
-    public void RestartGame()
-    {
-        gameResult.text = "";
+        public void RestartGame()
+        {
+            gameResult.text = "";
         
-        SetPoints(0);
-        GameStarted = true;
+            SetPoints(0);
+            GameStarted = true;
         
-        Field.Instance.GenerateNewField();
-    }
+            Field.Instance.GenerateNewField();
+        }
 
-    public void AddPoints(int points)
-    {
-        SetPoints(Points + points);
-    }
+        public void AddPoints(int points)
+        {
+            SetPoints(Points + points);
+        }
 
-    private void SetPoints(int points)
-    {
-        Points = points;
-        pointsText.text = Points.ToString();
-    }
+        public void SetPoints(int points)
+        {
+            Points = points;
+            pointsText.text = Points.ToString();
+        }
 
-    private void Start()
-    {
-        StartGame();
-    }
+        private void Start()
+        {
+            StartGame();
+        }
 
-    public void Win()
-    {
-        GameStarted = false;
-        gameResult.text = "WIN";
-    }
+        public void Win()
+        {
+            GameStarted = false;
+            gameResult.text = "WIN";
+        }
 
-    public void Lose()
-    {
-        GameStarted = false;
-        gameResult.text = "LOSE";
-    }
+        public void Lose()
+        {
+            GameStarted = false;
+            gameResult.text = "LOSE";
+        }
 
-    public int GetPoints()
-    {
-        return Points;
-    }
+        public int GetPoints()
+        {
+            return Points;
+        }
 
-    public void ChangePoints(int points)
-    {
-        Points = points;
-        pointsText.text = Points.ToString();
+        public void ChangePoints(int points)
+        {
+            Points = points;
+            pointsText.text = Points.ToString();
+        }
+
+        public void setPointsText(TextMeshProUGUI text)
+        {
+            pointsText = text;
+        }
+
+        public void setGameResult(TextMeshProUGUI text)
+        {
+            gameResult = text;
+        }
     }
 }

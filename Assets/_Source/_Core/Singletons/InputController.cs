@@ -1,120 +1,122 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-
-public class InputController : MonoBehaviour
+namespace Singletons
 {
-    private GameInput gameInput;
-    private Field field;
-    
-    private Vector2 touchStartPosition;
-    private bool isTouching = false;
-
-    public void Awake()
+    public class InputController : MonoBehaviour
     {
-        gameInput = new GameInput();
-        gameInput.Enable();
+        private GameInput gameInput;
+        private Field field;
+    
+        private Vector2 touchStartPosition;
+        private bool isTouching = false;
+
+        public void Awake()
+        {
+            gameInput = new GameInput();
+            gameInput.Enable();
         
-        field = GetComponent<Field>();
+            field = GetComponent<Field>();
 
-        gameInput.Gameplay.Move.performed += OnMove;
-        gameInput.Gameplay.MouseSwipe.performed += OnMouseSwipe;
-        gameInput.Gameplay.ScreenSwipe.performed += OnScreenSwipe;
+            gameInput.Gameplay.Move.performed += OnMove;
+            gameInput.Gameplay.MouseSwipe.performed += OnMouseSwipe;
+            gameInput.Gameplay.ScreenSwipe.performed += OnScreenSwipe;
         
-        gameInput.Gameplay.MouseSwipe.canceled += OnMouseSwipeEnd;
-        gameInput.Gameplay.ScreenSwipe.canceled += OnScreenSwipeEnd;
+            gameInput.Gameplay.MouseSwipe.canceled += OnMouseSwipeEnd;
+            gameInput.Gameplay.ScreenSwipe.canceled += OnScreenSwipeEnd;
 
-    }
-    
-    private void OnMouseSwipe(InputAction.CallbackContext context)
-    {
-        if (!isTouching)
-        {
-            touchStartPosition = Mouse.current.position.ReadValue();
-            isTouching = true;
         }
-    }
     
-    private void OnScreenSwipe(InputAction.CallbackContext context)
-    {
-        if (!isTouching)
+        private void OnMouseSwipe(InputAction.CallbackContext context)
         {
-            touchStartPosition = context.ReadValue<Vector2>();
-            isTouching = true;
-        }
-    }
-    
-    
-    private void OnMouseSwipeEnd(InputAction.CallbackContext context)
-    {
-        isTouching = false;  
-        var touchEndPosition = Mouse.current.position.ReadValue();;
-        var vec = touchEndPosition - touchStartPosition;
-        if (vec.magnitude > 50)
-        {
-            if (Mathf.Abs(vec.x) > Mathf.Abs(vec.y))
+            if (!isTouching)
             {
-                if (field)
-                {
-                    Debug.Log($"Mouse {vec.x}");
-                    field.OnInput(vec.x > 0 ? Vector2.right : Vector2.left);
-                }
-            }
-            else
-            {
-                if (field)
-                {
-                    Debug.Log($"Mouse {vec.y}");
-                    field.OnInput(vec.y > 0 ? Vector2.up : Vector2.down);
-                }
+                touchStartPosition = Mouse.current.position.ReadValue();
+                isTouching = true;
             }
         }
-    }
-
-    private void OnScreenSwipeEnd(InputAction.CallbackContext context)
-    {
-        isTouching = false;  
-        Vector2 touchEndPosition = context.ReadValue<Vector2>();
-        var vec = touchEndPosition - touchStartPosition;
-        if (vec.magnitude > 50)
+    
+        private void OnScreenSwipe(InputAction.CallbackContext context)
         {
-            if (Mathf.Abs(vec.x) > Mathf.Abs(vec.y))
+            if (!isTouching)
             {
-                if (field)
-                {
-                    Debug.Log($"Mouse {vec.x}");
-                    field.OnInput(vec.x > 0 ? Vector2.left : Vector2.right);
-                }
+                touchStartPosition = context.ReadValue<Vector2>();
+                isTouching = true;
             }
-            else
+        }
+    
+    
+        private void OnMouseSwipeEnd(InputAction.CallbackContext context)
+        {
+            isTouching = false;  
+            var touchEndPosition = Mouse.current.position.ReadValue();;
+            var vec = touchEndPosition - touchStartPosition;
+            if (vec.magnitude > 50)
             {
-                if (field)
+                if (Mathf.Abs(vec.x) > Mathf.Abs(vec.y))
                 {
-                    Debug.Log($"Mouse {vec.y}");
-                    field.OnInput(vec.y > 0 ? Vector2.up : Vector2.down);
+                    if (field)
+                    {
+                        Debug.Log($"Mouse {vec.x}");
+                        field.OnInput(vec.x > 0 ? Vector2.right : Vector2.left);
+                    }
+                }
+                else
+                {
+                    if (field)
+                    {
+                        Debug.Log($"Mouse {vec.y}");
+                        field.OnInput(vec.y > 0 ? Vector2.up : Vector2.down);
+                    }
                 }
             }
         }
-    }
-    
-    private void OnMove(InputAction.CallbackContext context)
-    {
-        Vector2 inputVector = context.ReadValue<Vector2>();
-        if (field)
+
+        private void OnScreenSwipeEnd(InputAction.CallbackContext context)
         {
-            Debug.Log($"Keyboard {inputVector}");
-            field.OnInput(inputVector);
+            isTouching = false;  
+            Vector2 touchEndPosition = context.ReadValue<Vector2>();
+            var vec = touchEndPosition - touchStartPosition;
+            if (vec.magnitude > 50)
+            {
+                if (Mathf.Abs(vec.x) > Mathf.Abs(vec.y))
+                {
+                    if (field)
+                    {
+                        Debug.Log($"Mouse {vec.x}");
+                        field.OnInput(vec.x > 0 ? Vector2.left : Vector2.right);
+                    }
+                }
+                else
+                {
+                    if (field)
+                    {
+                        Debug.Log($"Mouse {vec.y}");
+                        field.OnInput(vec.y > 0 ? Vector2.up : Vector2.down);
+                    }
+                }
+            }
         }
+    
+        private void OnMove(InputAction.CallbackContext context)
+        {
+            Vector2 inputVector = context.ReadValue<Vector2>();
+            if (field)
+            {
+                Debug.Log($"Keyboard {inputVector}");
+                field.OnInput(inputVector);
+            }
+        }
+
+        private void OnDestroy()
+        {
+            gameInput.Gameplay.Move.performed -= OnMove;
+            gameInput.Gameplay.MouseSwipe.performed -= OnMouseSwipe;
+            gameInput.Gameplay.ScreenSwipe.performed -= OnScreenSwipe;
+
+            gameInput.Gameplay.MouseSwipe.canceled -= OnMouseSwipeEnd;
+            gameInput.Gameplay.ScreenSwipe.canceled -= OnScreenSwipeEnd;
+        }
+
     }
-
-    private void OnDestroy()
-    {
-        gameInput.Gameplay.Move.performed -= OnMove;
-        gameInput.Gameplay.MouseSwipe.performed -= OnMouseSwipe;
-        gameInput.Gameplay.ScreenSwipe.performed -= OnScreenSwipe;
-
-        gameInput.Gameplay.MouseSwipe.canceled -= OnMouseSwipeEnd;
-        gameInput.Gameplay.ScreenSwipe.canceled -= OnScreenSwipeEnd;
-    }
-
 }
