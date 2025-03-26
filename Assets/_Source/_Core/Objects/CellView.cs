@@ -32,7 +32,7 @@ public class CellView : MonoBehaviour
     
     private void UpdateValue(int newValue)
     {
-        if (cell != null)
+        if (cell != null && image != null && points != null)
         {
             points.text = cell.IsEmpty ? String.Empty : cell.Points.ToString();
             image.color = ColorManager.Instance.CellColors[cell.Value];
