@@ -6,6 +6,7 @@
         "UnityEditor.TestRunner",
         "Core",
         "Unity.TextMeshPro",
+        "FlurentAssestion",
         "Unity.InputSystem"
     ],
     "includePlatforms": [],

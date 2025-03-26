@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageReport scope="Summary">
+  <Summary>
+    <Generatedon>3/26/2025 - 6:47:50 PM</Generatedon>
+    <Parser>MultiReportParser (4x OpenCoverParser)</Parser>
+    <Assemblies>1</Assemblies>
+    <Classes>8</Classes>
+    <Files>8</Files>
+    <Coveredlines>370</Coveredlines>
+    <Uncoveredlines>213</Uncoveredlines>
+    <Coverablelines>583</Coverablelines>
+    <Totallines>1203</Totallines>
+    <Linecoverage>63.4</Linecoverage>
+    <Coveredbranches>0</Coveredbranches>
+    <Totalbranches>0</Totalbranches>
+    <Coveredmethods>64</Coveredmethods>
+    <Totalmethods>97</Totalmethods>
+    <Methodcoverage>65.9</Methodcoverage>
+  </Summary>
+  <Coverage>
+    <Assembly name="Core" classes="8" coverage="63.4" coveredlines="370" coverablelines="583" totallines="1203" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="64" totalmethods="97" methodcoverage="65.9">
+      <Class name="GameInput" coverage="20.6" coveredlines="18" coverablelines="87" totallines="331" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="8" totalmethods="31" methodcoverage="25.8" />
+      <Class name="Objects.Cell" coverage="100" coveredlines="39" coverablelines="39" totallines="84" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="16" totalmethods="16" methodcoverage="100" />
+      <Class name="Objects.CellView" coverage="80.9" coveredlines="17" coverablelines="21" totallines="49" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" totalmethods="3" methodcoverage="100" />
+      <Class name="Singletons.ColorManager" coverage="100" coveredlines="6" coverablelines="6" totallines="19" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="1" methodcoverage="100" />
+      <Class name="Singletons.Field" coverage="85.4" coveredlines="217" coverablelines="254" totallines="434" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="18" totalmethods="19" methodcoverage="94.7" />
+      <Class name="Singletons.GameControlller" coverage="72.5" coveredlines="37" coverablelines="51" totallines="95" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="13" totalmethods="16" methodcoverage="81.2" />
+      <Class name="Singletons.InputController" coverage="22" coveredlines="19" coverablelines="86" totallines="122" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" totalmethods="8" methodcoverage="37.5" />
+      <Class name="Singletons.SaveLoadManager" coverage="43.5" coveredlines="17" coverablelines="39" totallines="69" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="3" methodcoverage="66.6" />
+    </Assembly>
+  </Coverage>
+</CoverageReport>
