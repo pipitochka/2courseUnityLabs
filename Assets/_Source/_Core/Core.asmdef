@@ -1,0 +1,13 @@
+{
+  "name": "Core",
+  "references": [
+    "UnityEngine",
+    "Unity.TextMeshPro",
+    "Unity.InputSystem",
+    "FluentAssertions"
+  ],
+  "includePlatforms": ["Editor", "Android", "iOS"],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "defineConstraints": []
+}

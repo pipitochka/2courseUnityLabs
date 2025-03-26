@@ -1,16 +1,19 @@
 using UnityEngine;
 
-public class ColorManager : MonoBehaviour
+namespace Singletons
 {
-    public static ColorManager Instance;
-
-    public Color[] CellColors; 
-    
-    public void Awake()
+    public class ColorManager : MonoBehaviour
     {
-        if (Instance == null)
+        public static ColorManager Instance;
+
+        public Color[] CellColors; 
+    
+        public void Awake()
         {
-            Instance = this;
+            if (Instance == null)
+            {
+                Instance = this;
+            }
         }
     }
 }
