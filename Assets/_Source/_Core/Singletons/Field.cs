@@ -164,7 +164,11 @@ namespace Singletons
 
          if (anyCellMoved)
          {
-            CreateCell();
+            if (!isTest)
+            {
+               CreateCell();
+            }
+
             CheckGameResult();
          }
 

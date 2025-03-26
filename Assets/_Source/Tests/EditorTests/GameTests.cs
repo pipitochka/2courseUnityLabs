@@ -173,39 +173,7 @@ namespace Tests.EditorTests
             gameController.GetPoints().Should().Be(56);
         }
         
-        // [Test]
-        // public void InputTest()
-        // {
-        //     gameController.SetPoints(0);
-        //     
-        //     var keyboard = InputSystem.AddDevice<Keyboard>();
-        //     var mouse = InputSystem.AddDevice<Mouse>();
-        //     
-        //     int[,] dataIn = new int[,]
-        //     {
-        //         { 0, 8, 8, 0 },
-        //         { 4, 2, 4, 2 },
-        //         { 0, 2, 0, 4 },
-        //         { 4, 4, 0, 0 }
-        //     };
-        //
-        //     
-        //     field.setField(dataIn);
-        //
-        //     keyboard.wKey.ReadValue();
-        //     
-        //     int[,] dataOut = new int[,]
-        //     {
-        //         { 4, 8, 8, 2 },
-        //         { 0, 4, 4, 4 },
-        //         { 4, 4, 0, 0 },
-        //         { 0, 0, 0, 0 }
-        //     };
-        //
-        //     int[,] dataOutReal = field.getField();
-        //     
-        //     dataOutReal.Should().BeEquivalentTo(dataOut);
-        // }
+        
         
     }
 }
