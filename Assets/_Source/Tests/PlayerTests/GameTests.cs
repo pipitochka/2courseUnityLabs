@@ -7,7 +7,9 @@ using Singletons;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 using UnityEngine.InputSystem.LowLevel;
+using Vector2 = System.Numerics.Vector2;
 
 namespace Tests.PlayerTests
 {
@@ -52,18 +54,16 @@ namespace Tests.PlayerTests
 
             field.setField(dataIn);
 
-            var keyboardState = new KeyboardState(Key.W); // Указываем, что клавиша W нажата
-            InputSystem.QueueStateEvent(keyboard, keyboardState); // Передаем состояние клавиши
-            InputSystem.Update(); // Обновляем систему ввода
-            yield return null; // Даем системе время для обработки
+            var keyboardState = new KeyboardState(Key.W); 
+            InputSystem.QueueStateEvent(keyboard, keyboardState); 
+            InputSystem.Update(); 
+            yield return null; 
 
-            keyboardState = new KeyboardState(); // Пустой конструктор - все клавиши отпущены
-            InputSystem.QueueStateEvent(keyboard, keyboardState); // Передаем обновленное состояние клавиши
-            InputSystem.Update(); // Обновляем систему ввода
-            yield return null; // Даем системе время для обработки
-
-
-
+            keyboardState = new KeyboardState(); 
+            InputSystem.QueueStateEvent(keyboard, keyboardState); 
+            InputSystem.Update(); 
+            yield return null; 
+            
             int[,] dataOut = new int[,]
             {
                 { 8, 8, 8, 2 },
@@ -73,6 +73,28 @@ namespace Tests.PlayerTests
             };
 
             int[,] dataOutReal = field.getField();
+
+            Assert.AreEqual(dataOut, dataOutReal);
+            
+            keyboardState = new KeyboardState(Key.D); 
+            InputSystem.QueueStateEvent(keyboard, keyboardState); 
+            InputSystem.Update(); 
+            yield return null; 
+
+            keyboardState = new KeyboardState(); 
+            InputSystem.QueueStateEvent(keyboard, keyboardState); 
+            InputSystem.Update(); 
+            yield return null; 
+            
+            dataOut = new int[,]
+            {
+                { 0, 8, 16, 2 },
+                { 0, 0, 4, 8 },
+                { 0, 0, 0, 4 },
+                { 0, 0, 0, 0 }
+            };
+
+            dataOutReal = field.getField();
 
             Assert.AreEqual(dataOut, dataOutReal);
         }
